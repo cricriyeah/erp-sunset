@@ -1,0 +1,90 @@
+version: '3.8'
+
+services:
+  # 1. Base de Datos
+  postgres-db:
+    image: postgres:15-alpine
+    container_name: sunset-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: erp_sunset
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: secretpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - sunset-network
+
+  # 2. Monolito (Laravel + Vue)
+  laravel-app:
+    build:
+      context: ./backend-laravel
+      dockerfile: Dockerfile
+    container_name: sunset-laravel
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres-db
+    volumes:
+      - ./backend-laravel:/var/www/html
+    networks:
+      - sunset-network
+
+  # 3. Microservicio de Imágenes (Go)
+  go-images:
+    build:
+      context: ./go-images
+      dockerfile: Dockerfile
+    container_name: sunset-go-images
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    networks:
+      - sunset-network
+    
+    # 4. Microservicio de PDFs (Go)
+  go-pdfs:
+    build:
+      context: ./go-pdfs
+      dockerfile: Dockerfile
+    container_name: sunset-go-pdfs
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    networks:
+      - sunset-network
+
+  # 5. Microservicio Motor de Tareas / Workers (Go)
+  go-worker:
+    build:
+      context: ./go-worker
+      dockerfile: Dockerfile
+    container_name: sunset-go-worker
+    restart: unless-stopped
+    depends_on:
+      - postgres-db
+    networks:
+      - sunset-network
+
+  # 6. Servidor de WebSockets (Go)
+  go-websockets:
+    build:
+      context: ./go-websockets
+      dockerfile: Dockerfile
+    container_name: sunset-go-websockets
+    restart: unless-stopped
+    ports:
+      - "8082:8082"
+    networks:
+      - sunset-network
+
+volumes:
+  db_data:
+  
+
+networks:
+  sunset-network:
+    driver: bridge
