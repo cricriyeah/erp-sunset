@@ -52,7 +52,7 @@ Requisitos previos: Docker y Docker Desktop instalados (con integración WSL 2 h
 
 1.  **Clonar el repositorio:**
     ```bash
-    git clone [https://github.com/tu-usuario/erp-sunset.git](https://github.com/tu-usuario/erp-sunset.git)
+    git clone https://github.com/tu-usuario/erp-sunset.git
     cd erp-sunset
     ```
 
