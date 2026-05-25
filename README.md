@@ -92,3 +92,99 @@ Requisitos previos: Docker y Docker Desktop instalados (con integración WSL 2 h
     ```
 
 El sistema estará disponible en `http://localhost:8000`.
+
+ENG 
+
+# Sunset Sur - Real Estate ERP & CRM
+
+Comprehensive Enterprise Resource Planning (ERP) and Customer Relationship Management (CRM) system explicitly designed for the operation and administration of real estate developments.
+
+The system centralizes lead management, construction tracking, finances, multi-level commission calculations, and document automation within a highly responsive, scalable, and high-density visual platform.
+
+## Project Architecture
+
+The project utilizes a Monorepo approach, combining a robust monolith for business logic and security, supported by high-performance microservices for resource-intensive tasks. The entire infrastructure is orchestrated using Docker.
+
+### Tech Stack
+
+* **Backend (API Gateway & Core):** Laravel 11 (PHP 8.4)
+* **Frontend:** Vue.js 3 (Composition API) + Inertia.js
+* **Database:** PostgreSQL 15
+* **Styling & UI:** Tailwind CSS v4 (Custom Token-based Design System)
+* **Microservices:** Go (Golang)
+* **Infrastructure:** Docker & Docker Compose (Alpine images and Multi-stage builds)
+
+## Core Modules
+
+1. **Dashboard:** Key metrics, sales of the month, upcoming appointments, and construction alerts.
+2. **Users & Roles:** Granular access control for executives, sales representatives (individuals or team leaders), and construction staff.
+3. **CRM (Sales):** Visual conversion funnel, contact directory, digital dossiers, and appointment agenda.
+4. **Properties & Inventory:** Real estate development catalog, lot tracking, and real-time availability status.
+5. **Construction & Projects:** Technical specs, initial budgets, material expense tracking, and photographic progress logs.
+6. **Finances & Commissions:** Income registration, down payments, and a multi-level commission calculation engine.
+7. **Documents:** Automated generator for PDF contracts and quotes.
+
+## Design System (UI/UX)
+
+The user interface discards generic templates to implement the premium brand identity of "Sunset Condominios".
+
+* **Theme:** Strict Light Mode. Warm backgrounds (Sand) and dark text (Coffee).
+* **Tokens:** Mandatory use of semantic variables (`erp-tokens.css`) for UI states, finance indicators, and actions (e.g., `bg-erp-primary`, `text-erp-status-pending`).
+* **Typography:** * *Montserrat:* Primary font for UI, tables, and forms, optimized for high data density readability.
+    * *Literata:* Exclusive use for main display headers (H1/H2).
+* **Geometry:** Subtle borders and moderate border-radius (`rounded-lg`, `rounded-xl`), avoiding fully rounded elements or glassmorphism effects for better clarity.
+
+## Monorepo Structure
+
+* `/backend-laravel`: Main monolith (Routes, Controllers, Vue Views, Database).
+* `/go-imagenes`: Microservice for compressing and optimizing construction progress photographs.
+* `/go-pdfs`: Microservice for the rapid assembly of PDF contracts and receipts.
+* `/go-websockets`: Server for real-time notifications sent to the administrative panel.
+* `/go-worker`: Background engine to process asynchronous tasks and send reminders.
+
+## Local Environment & Installation
+
+Prerequisites: Docker and Docker Desktop installed (with WSL 2 integration enabled on Windows).
+
+1. **Clone the repository:**
+    ```bash
+    git clone [https://github.com/your-username/erp-sunset.git](https://github.com/your-username/erp-sunset.git)
+    cd erp-sunset
+    ```
+
+2. **Spin up the infrastructure with Docker Compose:**
+    ```bash
+    docker-compose up -d --build
+    ```
+
+3. **Install Backend (Laravel) dependencies:**
+    ```bash
+    docker exec -it sunset-laravel composer install
+    ```
+
+4. **Configure environment variables:**
+    Duplicate the `.env.example` file to `.env` inside `/backend-laravel` and ensure the internal database connection is set:
+    ```env
+    DB_CONNECTION=pgsql
+    DB_HOST=postgres-db
+    DB_PORT=5432
+    DB_DATABASE=erp_sunset
+    DB_USERNAME=root
+    DB_PASSWORD=secretpassword
+    ```
+
+5. **Generate the application key and run migrations:**
+    ```bash
+    docker exec -it sunset-laravel php artisan key:generate
+    docker exec -it sunset-laravel php artisan migrate
+    ```
+
+6. **Compile Frontend assets (Vue/Tailwind):**
+    From your local terminal (outside Docker), navigate to the Laravel folder and start Vite:
+    ```bash
+    cd backend-laravel
+    npm install
+    npm run dev
+    ```
+
+The system will be available at `http://localhost:8000`.
