@@ -1,0 +1,125 @@
+/**
+ * Sunset ERP — Design tokens
+ * Derivado de src/app/globals.css y patrones de componentes.
+ * Importar en el proyecto ERP: @import "./erp-tokens.css"; (después de tailwindcss)
+ */
+
+@theme {
+  /* ── Tipografía (heredada) ── */
+  --font-montserrat: var(--font-montserrat, "Montserrat", sans-serif);
+  --font-literata: var(--font-literata, "Literata", serif);
+  --font-ui: var(--font-montserrat);
+  --font-display: var(--font-literata);
+
+  /* ── Marca Sunset (heredada) ── */
+  --color-brand-blue: #1e3a8a;
+  --color-brand-green: #15803d;
+  --color-brand-sand: #e3cba8;
+  --color-brand-orange: #ea580c;
+  --color-brand-purple: #2e1065;
+
+  /* ── Superficies ERP (basadas en page-*) ── */
+  --color-erp-bg: #faf5f0;
+  --color-erp-bg-alt: #f3ebe0;
+  --color-erp-bg-elevated: #ffffff;
+  --color-erp-bg-muted: #ebe3d6;
+  --color-erp-bg-sidebar: #2c1a0e;
+  --color-erp-bg-sidebar-hover: #3d2820;
+
+  /* ── Texto ── */
+  --color-erp-text: #2c1a0e;
+  --color-erp-text-secondary: #5c4030;
+  --color-erp-text-muted: #8a6f5c;
+  --color-erp-text-inverse: #faf5f0;
+  --color-erp-text-on-primary: #ffffff;
+
+  /* ── Bordes y divisores ── */
+  --color-erp-border: rgba(44, 26, 14, 0.1);
+  --color-erp-border-strong: rgba(44, 26, 14, 0.2);
+  --color-erp-border-focus: #e6846a;
+
+  /* ── Acciones primarias (navegación, guardar, confirmar) ── */
+  --color-erp-primary: #1e3a8a;
+  --color-erp-primary-hover: #1e40af;
+  --color-erp-primary-muted: rgba(30, 58, 138, 0.1);
+  --color-erp-primary-border: rgba(30, 58, 138, 0.25);
+
+  /* ── Acciones secundarias / destacadas (CTA, crear nuevo) ── */
+  --color-erp-accent: #ea580c;
+  --color-erp-accent-hover: #c2410c;
+  --color-erp-accent-muted: rgba(234, 88, 12, 0.1);
+  --color-erp-accent-border: rgba(234, 88, 12, 0.25);
+
+  /* ── Semántica transversal (feedback, alertas) ── */
+  --color-erp-success: #15803d;
+  --color-erp-success-bg: #ecfdf3;
+  --color-erp-success-border: rgba(21, 128, 61, 0.25);
+  --color-erp-success-muted: rgba(21, 128, 61, 0.12);
+
+  --color-erp-warning: #b45309;
+  --color-erp-warning-bg: #fffbeb;
+  --color-erp-warning-border: rgba(180, 83, 9, 0.25);
+  --color-erp-warning-muted: rgba(180, 83, 9, 0.12);
+
+  --color-erp-danger: #b91c1c;
+  --color-erp-danger-bg: #fef2f2;
+  --color-erp-danger-border: rgba(185, 28, 28, 0.25);
+  --color-erp-danger-muted: rgba(185, 28, 28, 0.12);
+
+  --color-erp-info: #1e40af;
+  --color-erp-info-bg: #eff6ff;
+  --color-erp-info-border: rgba(30, 64, 175, 0.25);
+  --color-erp-info-muted: rgba(30, 64, 175, 0.12);
+
+  /* ── Estados de documento / flujo de trabajo ── */
+  --color-erp-status-draft: #78716c;
+  --color-erp-status-draft-bg: #f5f5f4;
+  --color-erp-status-pending: #b45309;
+  --color-erp-status-pending-bg: #fffbeb;
+  --color-erp-status-in-review: #1e40af;
+  --color-erp-status-in-review-bg: #eff6ff;
+  --color-erp-status-approved: #15803d;
+  --color-erp-status-approved-bg: #ecfdf3;
+  --color-erp-status-rejected: #b91c1c;
+  --color-erp-status-rejected-bg: #fef2f2;
+  --color-erp-status-cancelled: #57534e;
+  --color-erp-status-cancelled-bg: #e7e5e4;
+  --color-erp-status-archived: #6b7280;
+  --color-erp-status-archived-bg: #f3f4f6;
+
+  /* ── Inventario y operaciones ── */
+  --color-erp-stock-ok: #15803d;
+  --color-erp-stock-low: #ea580c;
+  --color-erp-stock-critical: #b91c1c;
+  --color-erp-stock-overstock: #7c3aed;
+
+  /* ── Finanzas ── */
+  --color-erp-money-positive: #15803d;
+  --color-erp-money-negative: #b91c1c;
+  --color-erp-money-neutral: #5c4030;
+  --color-erp-money-pending: #b45309;
+
+  /* ── Módulos (opcional: identidad por área) ── */
+  --color-erp-module-sales: #1e3a8a;
+  --color-erp-module-inventory: #53b076;
+  --color-erp-module-purchasing: #b45309;
+  --color-erp-module-hr: #2e1065;
+  --color-erp-module-finance: #1e40af;
+  --color-erp-module-crm: #d4728c;
+
+  /* ── Sombras (ERP: un poco más definidas que marketing) ── */
+  --shadow-erp-sm: 0 1px 2px 0 rgba(44, 26, 14, 0.06);
+  --shadow-erp-md: 0 4px 6px -1px rgba(44, 26, 14, 0.08),
+    0 2px 4px -2px rgba(44, 26, 14, 0.06);
+  --shadow-erp-lg: 0 10px 15px -3px rgba(44, 26, 14, 0.08),
+    0 4px 6px -4px rgba(44, 26, 14, 0.06);
+
+  /* ── Radios (ERP más contenido que landing) ── */
+  --radius-erp-sm: 0.5rem;
+  --radius-erp-md: 0.75rem;
+  --radius-erp-lg: 1rem;
+  --radius-erp-xl: 1.25rem;
+  --radius-erp-pill: 9999px;
+
+  --breakpoint-3xl: 120rem;
+}
